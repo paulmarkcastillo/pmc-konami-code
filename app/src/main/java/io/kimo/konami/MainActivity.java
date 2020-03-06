@@ -1,7 +1,8 @@
 package io.kimo.konami;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import io.kimo.konamicode.KonamiCode;
 

@@ -2,8 +2,6 @@ package io.kimo.konamicode;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +10,9 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.FrameLayout;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.core.view.MotionEventCompat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,11 +51,11 @@ public class KonamiCodeLayout extends FrameLayout implements KonamiSequenceListe
         public void onClick(View v) {
             int id = v.getId();
 
-            if(id == R.id.konami_button_a) {
+            if (id == R.id.konami_button_a) {
                 mLastPressedButton = Button.A;
-            } else if(id == R.id.konami_button_b) {
+            } else if (id == R.id.konami_button_b) {
                 mLastPressedButton = Button.B;
-            } else if(id == R.id.konami_button_start) {
+            } else if (id == R.id.konami_button_start) {
                 mLastPressedButton = Button.START;
             }
 
@@ -154,8 +155,7 @@ public class KonamiCodeLayout extends FrameLayout implements KonamiSequenceListe
                             mLastSwipedDirection = Direction.LEFT;
                         }
                     }
-                }
-                else if (Math.abs(diffY) > mSwipeThreshold) {
+                } else if (Math.abs(diffY) > mSwipeThreshold) {
                     if (diffY > 0) {
                         mLastSwipedDirection = Direction.DOWN;
                     } else {
@@ -176,7 +176,7 @@ public class KonamiCodeLayout extends FrameLayout implements KonamiSequenceListe
 
     @Override
     public boolean validSwipeSequence() {
-        int index = mSwipes.size()-1;
+        int index = mSwipes.size() - 1;
         Direction correctDirection = mKonamiCodeDirectionsOrder.get(index);
         Direction lastDirection = mSwipes.get(index);
 
@@ -195,7 +195,7 @@ public class KonamiCodeLayout extends FrameLayout implements KonamiSequenceListe
 
     @Override
     public boolean validPressedSequence() {
-        int index = mPressedButtons.size()-1;
+        int index = mPressedButtons.size() - 1;
 
         Button currentPressedButton = mPressedButtons.get(index);
         Button correctPressedButton = mKonamiCodeButtonsOrder.get(index);
@@ -213,15 +213,15 @@ public class KonamiCodeLayout extends FrameLayout implements KonamiSequenceListe
     }
 
     private void registerSwipe() {
-        if(mLastSwipedDirection != Direction.NONE) {
-            Log.d(TAG, "registerSwipe: "+mLastSwipedDirection);
+        if (mLastSwipedDirection != Direction.NONE) {
+            Log.d(TAG, "registerSwipe: " + mLastSwipedDirection);
             mSwipes.add(mLastSwipedDirection);
 
-            if(!validSwipeSequence()) {
+            if (!validSwipeSequence()) {
                 Log.d(TAG, "Invalid swipe sequence");
                 resetSwipeSequence();
             } else {
-                if(onSwipeSequenceAchieved()) {
+                if (onSwipeSequenceAchieved()) {
                     showDialog();
                     resetSwipeSequence();
                 }
@@ -230,15 +230,15 @@ public class KonamiCodeLayout extends FrameLayout implements KonamiSequenceListe
     }
 
     private void registerPress() {
-        if(mLastPressedButton != Button.NONE) {
+        if (mLastPressedButton != Button.NONE) {
             mPressedButtons.add(mLastPressedButton);
 
-            if(!validPressedSequence()) {
+            if (!validPressedSequence()) {
                 Log.d(TAG, "Invalid button sequence!");
                 resetPressedSequence();
                 buttonDialog.dismiss();
             } else {
-                if(onPressedSequenceAchieved()) {
+                if (onPressedSequenceAchieved()) {
                     triggerFinalCallback();
                     resetPressedSequence();
                 }
@@ -248,7 +248,7 @@ public class KonamiCodeLayout extends FrameLayout implements KonamiSequenceListe
 
     private void triggerFinalCallback() {
         buttonDialog.dismiss();
-        if(mCallback == null) {
+        if (mCallback == null) {
             Toast.makeText(getContext(), "Konami Code", Toast.LENGTH_LONG).show();
         } else {
             mCallback.onFinish();

@@ -2,12 +2,13 @@ package io.kimo.konamicode;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 public class KonamiCode {
 
@@ -18,9 +19,11 @@ public class KonamiCode {
     public KonamiCodeLayout.Callback getCallback() {
         return mCallback;
     }
+
     public Context getContext() {
         return mContext;
     }
+
     public ViewGroup getRootView() {
         return mRootView;
     }
@@ -38,6 +41,7 @@ public class KonamiCode {
 
         /**
          * Konami Code's builder
+         *
          * @param context
          */
         public Installer(@NonNull Context context) {
@@ -46,6 +50,7 @@ public class KonamiCode {
 
         /**
          * on - installs into an activity
+         *
          * @param activity
          */
         public Installer on(@NonNull Activity activity) {
@@ -55,6 +60,7 @@ public class KonamiCode {
 
         /**
          * into - installs into a fragment
+         *
          * @param fragment
          */
         public Installer on(@NonNull Fragment fragment) {
@@ -64,6 +70,7 @@ public class KonamiCode {
 
         /**
          * into - installs into a view
+         *
          * @param view
          */
         public Installer on(@NonNull View view) {
@@ -73,6 +80,7 @@ public class KonamiCode {
 
         /**
          * withCallback - interface executed after the whole code is executed
+         *
          * @param callback
          */
         public Installer callback(@NonNull KonamiCodeLayout.Callback callback) {
@@ -114,6 +122,5 @@ public class KonamiCode {
 
             return new KonamiCode(this);
         }
-
     }
 }
